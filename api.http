@@ -1,0 +1,286 @@
+# ============================================================
+# HTTP TESTING - REST CLIENT (VS Code Extension)
+# Ekstensi: REST Client by Huachao Mao
+# Install: ext install humao.rest-client
+# Cara pakai: Klik tombol "Send Request" di atas setiap request
+# ============================================================
+
+# Variabel global
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+
+###############################################################
+# 🏠 ROOT - Cek API berjalan
+###############################################################
+
+### GET Root - Info API
+GET {{baseUrl}}/
+Accept: {{contentType}}
+
+
+###############################################################
+# ✅ CREATE - POST /api/products
+###############################################################
+
+### POST - Buat product baru (Laptop)
+# @name createLaptop
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Laptop Dell XPS 15",
+  "category": "Electronics",
+  "price": 15000000,
+  "stock": 5
+}
+
+---
+
+### POST - Buat product baru (Headset)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Headset Sony WH-1000XM5",
+  "category": "Audio",
+  "price": 3500000,
+  "stock": 20
+}
+
+---
+
+### POST - Buat product baru (Monitor)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Monitor LG UltraWide 34",
+  "category": "Electronics",
+  "price": 7800000,
+  "stock": 8
+}
+
+---
+
+### POST - ❌ Validasi ERROR: Field tidak lengkap
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Product Tanpa Harga"
+}
+
+---
+
+### POST - ❌ Validasi ERROR: Price negatif
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Product Error",
+  "category": "Test",
+  "price": -1000,
+  "stock": 10
+}
+
+
+###############################################################
+# 📋 READ ALL - GET /api/products
+###############################################################
+
+### GET All - Ambil semua products
+GET {{baseUrl}}/api/products
+Accept: {{contentType}}
+
+---
+
+### GET All - Filter by category
+GET {{baseUrl}}/api/products?category=Electronics
+Accept: {{contentType}}
+
+---
+
+### GET All - Search by name
+GET {{baseUrl}}/api/products?search=laptop
+Accept: {{contentType}}
+
+---
+
+### GET All - Filter category + search
+GET {{baseUrl}}/api/products?category=Electronics&search=keyboard
+Accept: {{contentType}}
+
+
+###############################################################
+# 🔍 READ ONE - GET /api/products/:id
+###############################################################
+
+### GET by ID - Ambil product ID 1
+GET {{baseUrl}}/api/products/1
+Accept: {{contentType}}
+
+---
+
+### GET by ID - Ambil product ID 2
+GET {{baseUrl}}/api/products/2
+Accept: {{contentType}}
+
+---
+
+### GET by ID - Ambil product ID 3
+GET {{baseUrl}}/api/products/3
+Accept: {{contentType}}
+
+---
+
+### GET by ID - ❌ ERROR: ID tidak ditemukan
+GET {{baseUrl}}/api/products/999
+Accept: {{contentType}}
+
+---
+
+### GET by ID - ❌ ERROR: ID bukan angka
+GET {{baseUrl}}/api/products/abc
+Accept: {{contentType}}
+
+
+###############################################################
+# ✏️  UPDATE - PUT /api/products/:id
+###############################################################
+
+### PUT - Update penuh product ID 1
+PUT {{baseUrl}}/api/products/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Laptop ASUS ROG Updated",
+  "category": "Gaming",
+  "price": 12000000,
+  "stock": 7
+}
+
+---
+
+### PUT - Update sebagian (partial update) - hanya harga
+PUT {{baseUrl}}/api/products/2
+Content-Type: {{contentType}}
+
+{
+  "price": 275000
+}
+
+---
+
+### PUT - Update sebagian - hanya stock
+PUT {{baseUrl}}/api/products/3
+Content-Type: {{contentType}}
+
+{
+  "stock": 25
+}
+
+---
+
+### PUT - ❌ ERROR: ID tidak ditemukan
+PUT {{baseUrl}}/api/products/999
+Content-Type: {{contentType}}
+
+{
+  "name": "Product Tidak Ada",
+  "price": 100000
+}
+
+---
+
+### PUT - ❌ ERROR: Price tidak valid
+PUT {{baseUrl}}/api/products/1
+Content-Type: {{contentType}}
+
+{
+  "price": -500
+}
+
+
+###############################################################
+# 🗑️  DELETE - DELETE /api/products/:id
+###############################################################
+
+### DELETE - Hapus product ID 3
+DELETE {{baseUrl}}/api/products/3
+Accept: {{contentType}}
+
+---
+
+### DELETE - Hapus product ID 2
+DELETE {{baseUrl}}/api/products/2
+Accept: {{contentType}}
+
+---
+
+### DELETE - ❌ ERROR: ID tidak ditemukan (sudah dihapus)
+DELETE {{baseUrl}}/api/products/999
+Accept: {{contentType}}
+
+---
+
+### DELETE - ❌ ERROR: ID bukan angka
+DELETE {{baseUrl}}/api/products/abc
+Accept: {{contentType}}
+
+
+###############################################################
+# 🔁 SKENARIO LENGKAP - End-to-End Test Flow
+###############################################################
+
+### STEP 1: Lihat semua data awal
+GET {{baseUrl}}/api/products
+Accept: {{contentType}}
+
+---
+
+### STEP 2: Tambah product baru
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Webcam Logitech C920",
+  "category": "Electronics",
+  "price": 1200000,
+  "stock": 15
+}
+
+---
+
+### STEP 3: Ambil product yang baru dibuat (sesuaikan ID)
+GET {{baseUrl}}/api/products/4
+Accept: {{contentType}}
+
+---
+
+### STEP 4: Update product tersebut
+PUT {{baseUrl}}/api/products/4
+Content-Type: {{contentType}}
+
+{
+  "price": 1100000,
+  "stock": 12
+}
+
+---
+
+### STEP 5: Konfirmasi update berhasil
+GET {{baseUrl}}/api/products/4
+Accept: {{contentType}}
+
+---
+
+### STEP 6: Hapus product
+DELETE {{baseUrl}}/api/products/4
+Accept: {{contentType}}
+
+---
+
+### STEP 7: Konfirmasi sudah terhapus
+GET {{baseUrl}}/api/products/4
+Accept: {{contentType}}
