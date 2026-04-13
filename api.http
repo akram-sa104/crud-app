@@ -11,7 +11,7 @@
 
 
 ###############################################################
-# 🏠 ROOT - Cek API berjalan
+#  ROOT - Cek API berjalan
 ###############################################################
 
 ### GET Root - Info API
@@ -20,7 +20,7 @@ Accept: {{contentType}}
 
 
 ###############################################################
-# ✅ CREATE - POST /api/products
+# CREATE - POST /api/products
 ###############################################################
 
 ### POST - Buat product baru (Laptop)
@@ -63,7 +63,7 @@ Content-Type: {{contentType}}
 
 ---
 
-### POST - ❌ Validasi ERROR: Field tidak lengkap
+### POST - Validasi ERROR: Field tidak lengkap
 POST {{baseUrl}}/api/products
 Content-Type: {{contentType}}
 
@@ -73,7 +73,7 @@ Content-Type: {{contentType}}
 
 ---
 
-### POST - ❌ Validasi ERROR: Price negatif
+### POST - Validasi ERROR: Price negatif
 POST {{baseUrl}}/api/products
 Content-Type: {{contentType}}
 
@@ -86,7 +86,7 @@ Content-Type: {{contentType}}
 
 
 ###############################################################
-# 📋 READ ALL - GET /api/products
+#  READ ALL - GET /api/products
 ###############################################################
 
 ### GET All - Ambil semua products
@@ -113,7 +113,7 @@ Accept: {{contentType}}
 
 
 ###############################################################
-# 🔍 READ ONE - GET /api/products/:id
+#  READ ONE - GET /api/products/:id
 ###############################################################
 
 ### GET by ID - Ambil product ID 1
@@ -134,19 +134,19 @@ Accept: {{contentType}}
 
 ---
 
-### GET by ID - ❌ ERROR: ID tidak ditemukan
+### GET by ID - ERROR: ID tidak ditemukan
 GET {{baseUrl}}/api/products/999
 Accept: {{contentType}}
 
 ---
 
-### GET by ID - ❌ ERROR: ID bukan angka
+### GET by ID - ERROR: ID bukan angka
 GET {{baseUrl}}/api/products/abc
 Accept: {{contentType}}
 
 
 ###############################################################
-# ✏️  UPDATE - PUT /api/products/:id
+#   UPDATE - PUT /api/products/:id
 ###############################################################
 
 ### PUT - Update penuh product ID 1
@@ -182,7 +182,7 @@ Content-Type: {{contentType}}
 
 ---
 
-### PUT - ❌ ERROR: ID tidak ditemukan
+### PUT - ERROR: ID tidak ditemukan
 PUT {{baseUrl}}/api/products/999
 Content-Type: {{contentType}}
 
@@ -193,7 +193,7 @@ Content-Type: {{contentType}}
 
 ---
 
-### PUT - ❌ ERROR: Price tidak valid
+### PUT - ERROR: Price tidak valid
 PUT {{baseUrl}}/api/products/1
 Content-Type: {{contentType}}
 
@@ -203,7 +203,7 @@ Content-Type: {{contentType}}
 
 
 ###############################################################
-# 🗑️  DELETE - DELETE /api/products/:id
+#  DELETE - DELETE /api/products/:id
 ###############################################################
 
 ### DELETE - Hapus product ID 3
@@ -218,19 +218,19 @@ Accept: {{contentType}}
 
 ---
 
-### DELETE - ❌ ERROR: ID tidak ditemukan (sudah dihapus)
+### DELETE - ERROR: ID tidak ditemukan (sudah dihapus)
 DELETE {{baseUrl}}/api/products/999
 Accept: {{contentType}}
 
 ---
 
-### DELETE - ❌ ERROR: ID bukan angka
+### DELETE - ERROR: ID bukan angka
 DELETE {{baseUrl}}/api/products/abc
 Accept: {{contentType}}
 
 
 ###############################################################
-# 🔁 SKENARIO LENGKAP - End-to-End Test Flow
+#  SKENARIO LENGKAP - End-to-End Test Flow
 ###############################################################
 
 ### STEP 1: Lihat semua data awal

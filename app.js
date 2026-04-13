@@ -36,7 +36,7 @@ const errorResponse = (res, statusCode, message) => {
 // Root
 app.get('/', (req, res) => {
   res.json({
-    message: '🚀 CRUD API with Express.js',
+    message: ' CRUD API with Express.js',
     version: '1.0.0',
     endpoints: {
       'GET    /api/products':         'Get all products',
@@ -204,8 +204,8 @@ app.use((err, req, res, next) => {
 // START SERVER
 // ============================================================
 app.listen(PORT, () => {
-  console.log(`✅ Server berjalan di http://localhost:${PORT}`);
-  console.log(`📖 Dokumentasi endpoint: http://localhost:${PORT}`);
+  console.log(` Server berjalan di http://localhost:${PORT}`);
+  console.log(` Dokumentasi endpoint: http://localhost:${PORT}`);
 });
 
 module.exports = app;
